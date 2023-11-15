@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>GreenTie's PSONE Warhawk Stats</title>
+   <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+   <meta http-equiv="Pragma" content="no-cache" />
+   <meta http-equiv="Expires" content="0" />
+</head>
+
+<body>
+
+   <div id="div1">
+
+      <h1>PSONE Current Warhawk Stats as of November 14th, 2023</h1>
+      <p>It can take a while for the data to load</p>
+
+      <style type="text/css">
+         .tg {
+            border-collapse: collapse;
+            border-spacing: 0;
+         }
+
+         .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+         }
+
+         .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+         }
+
+         .tg .tg-0lax {
+            text-align: left;
+            vertical-align: top
+         }
+
+         body {
+            background-color: #ffffff;
+         }
+      </style>
+
+      <table id="statdatatable" class="tg">
+         <tr>
+            <th>#</th>
+            <th><a href='javascript:void(0);' onclick='filterby("name");'>Name</a></th>
+            <th><a href='javascript:void(0);' onclick='filterby("rank");'>Rank</a></th>
+            <th><a href='javascript:void(0);' onclick='filterby("total_points");'>Total Points</a></th>
+            <th><a href='javascript:void(0);' onclick='filterby("games_played");'>Games Played</a></th>
+            <th><a href='javascript:void(0);' onclick='filterby("time_played");'>Hours Played</a></th>
+            <th><a href='javascript:void(0);' onclick='filterby("kills");'>Kills</a></th>
+            <th><a href='javascript:void(0);' onclick='filterby("deaths");'>Deaths</a></th>
+            <th><a href='javascript:void(0);' onclick='filterby("kdr")'>KDR</a></th>
+         </tr>
+      </table>
+
+   </div>
+
+
+   <script>
+
+      //fetch function
+      let randomNum = Math.floor(Math.random() * 1000);
+
+      fetch('./data.json?' + randomNum.toString()).then(function (u) { return u.json(); }).then(
+         function (json) {
+            data_function(json, "total_points"); //calling and passing json to another function data_function
+         }
+      )
+      var sharedata
+      //another functions
+      function data_function(data, sortType) {
+         //alert(data.length);
+         //console.log(data)
+
+         sharedata = data
+
+         //let lblLastUpdated = document.getElementById("lblLastUpdated");
+         //lblLastUpdated.innerText = "Last Updated (Arizona Time) : " + data.date;
+
+         //let lblTotalGames = document.getElementById("lblTotalGames");
+         //lblTotalGames.innerText = "Total Games Recorded : " + data.updateCount;
+
+         if(sortType == "total_points") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.total_points > b.total_points) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "name") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.name.toLowerCase() < b.name.toLowerCase()) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "rank") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.rank > b.rank) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "games_played") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.games_played > b.games_played) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "time_played") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.time_played > b.time_played) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "kills") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.kills > b.kills) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "deaths") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.deaths > b.deaths) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "kdr") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.kdr > b.kdr) {
+               return -1;
+            }
+         });
+         }
+         /*if(sortType == "player_killed") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.player_killed > b.player_killed) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "killed_times") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.killed_times > b.killed_times) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "player_killed_by") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.player_killed_by > b.player_killed_by) {
+               return -1;
+            }
+         });
+         }
+         if(sortType == "died_times") {
+            data.playerList = data.playerList.sort((a, b) => {
+            if (a.died_times > b.died_times) {
+               return -1;
+            }
+         });
+         }*/
+
+
+
+
+         var elmtTable = document.getElementById('statdatatable');
+         var tableRows = elmtTable.getElementsByTagName('tr');
+         var rowCount = tableRows.length;
+
+         for (var x = rowCount - 1; x > 0; x--) {
+            elmtTable.removeChild(tableRows[x]);
+         }
+
+
+
+         for (let i = 0; i < data.playerList.length; i++) {
+            //text += cars[i] + "<br>";
+            //alert(data.players[i].username);
+            let table = document.getElementById("statdatatable");
+
+
+
+
+
+
+            //table.innerHTML = ""
+            //console.log(table)
+            // Create row element
+            let row = document.createElement("tr")
+
+            //location.reload();
+
+            // Create cells
+            let c0 = document.createElement("td")
+            let c1 = document.createElement("td")
+            let c2 = document.createElement("td")
+            let c3 = document.createElement("td")
+            let c4 = document.createElement("td")
+            let c5 = document.createElement("td")
+            let c6 = document.createElement("td")
+            let c7 = document.createElement("td")
+            let c8 = document.createElement("td")
+            //let c9 = document.createElement("td")
+            //let c10 = document.createElement("td")
+            //let c11 = document.createElement("td")
+            //let c12 = document.createElement("td")
+
+            // Insert data to cells
+            c0.innerText = i + 1
+            c1.innerText = data.playerList[i].name
+            c2.innerText = data.playerList[i].rank
+            c3.innerText = data.playerList[i].total_points
+            c4.innerText = data.playerList[i].games_played
+            c5.innerText = data.playerList[i].time_played
+            c6.innerText = data.playerList[i].kills
+            c7.innerText = data.playerList[i].deaths
+            c8.innerText = data.playerList[i].kdr
+            //c9.innerText = data.playerList[i].player_killed
+            //c10.innerText = data.playerList[i].killed_times
+            //c11.innerText = data.playerList[i].player_killed_by
+            //c12.innerText = data.playerList[i].died_times
+
+
+            /*
+            if(data.playerList[i].kills == 0){
+               c5.innerText = 0;
+            }
+            else if(data.playerList[i].deaths == 0){
+               c5.innerText = data.playerList[i].kills + ".00";
+            }
+            else{
+               c5.innerText = (data.playerList[i].kills / data.playerList[i].deaths).toFixed(2);
+            }*/
+
+
+
+
+            // Append cells to row
+            row.appendChild(c0);
+            row.appendChild(c1);
+            row.appendChild(c2);
+            row.appendChild(c3);
+            row.appendChild(c4);
+            row.appendChild(c5);
+            row.appendChild(c6);
+            row.appendChild(c7);
+            row.appendChild(c8);
+            //row.appendChild(c9);
+            //row.appendChild(c10);
+            //row.appendChild(c11);
+            //row.appendChild(c12);
+
+            // Append row to table body
+            table.appendChild(row)
+
+
+         }
+      }
+
+      //console.log({ data })
+
+
+      //console.log(jsonData);
+
+
+      function filterby(thing) {
+
+         data_function(sharedata, thing)
+
+         // location.reload()
+      }
+
+
+
+
+   </script>
+
+
+
+
+</body>
+
+</html>
