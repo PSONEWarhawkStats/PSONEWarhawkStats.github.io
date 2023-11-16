@@ -13,12 +13,12 @@
 
    <div id="div1">
 
-      <h1>PSONE Current Warhawk Stats RESET from November 14th, 2023</h1>
-      <h1>Updated November 15th, 2023 (1 day's worth of data)</h1>
-      <a href="original.html">Link to see ALL Warhawk data from November 14th, 2023</a>
-      <p>I am only showing the data from active accounts here.<br>Any account that has played in ranked games on PSONE's server will show here.
-      <br>This table only shows the points earned SINCE November 14th, 2023</p>
-      <p>It can take a while for the data to load. -GreenTie</p>
+      <h1>PSONE Current Warhawk Stats as of November 14th, 2023</h1>
+      <h1>PSONE has yet to fix player stats</h1>
+
+      <a href="index.html">Link to see ALL Warhawk data SINCE November 14th, 2023</a>
+
+      <p>It can take a while for the data to load -GreenTie</p>
 
       <style type="text/css">
          .tg {
@@ -81,7 +81,7 @@
       //fetch function
       let randomNum = Math.floor(Math.random() * 1000);
 
-      fetch('./newdata.json?' + randomNum.toString()).then(function (u) { return u.json(); }).then(
+      fetch('./data.json?' + randomNum.toString()).then(function (u) { return u.json(); }).then(
          function (json) {
             data_function(json, "total_points"); //calling and passing json to another function data_function
          }
