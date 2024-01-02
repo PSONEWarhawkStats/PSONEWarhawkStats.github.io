@@ -9,25 +9,31 @@
    <meta http-equiv="Expires" content="0" />
 </head>
 
-<body>
+<body class="container">
 
-   <div id="div1">
+   <div id="div2" class="bodyDiv"></div>
+   <div id="div1" class="bodyDiv2">
 
-      <h1>PSONE Current Warhawk Stats as of November 14th, 2023</h1>
+      <h1>PSONE Current Warhawk Stats as of<br> January 1st, 2024</h1>
       <h1>PSONE has yet to fix player stats</h1>
 
-      <a href="index.html">Link to see ALL Warhawk data SINCE November 14th, 2023</a>
+      <a href="index.html">Link to see ALL Warhawk data SINCE January 1st, 2024</a>
 
       <p>It can take a while for the data to load -GreenTie</p>
 
       <style type="text/css">
+         .container {
+            display: flex;
+            justify-content: center;
+         }
+
          .tg {
             border-collapse: collapse;
             border-spacing: 0;
          }
 
          .tg td {
-            border-color: black;
+            border-color: rgb(104, 104, 104);
             border-style: solid;
             border-width: 1px;
             font-family: Arial, sans-serif;
@@ -38,7 +44,7 @@
          }
 
          .tg th {
-            border-color: black;
+            border-color: rgb(104, 104, 104);
             border-style: solid;
             border-width: 1px;
             font-family: Arial, sans-serif;
@@ -55,7 +61,56 @@
          }
 
          body {
-            background-color: rgb(183, 184, 189)
+            background-image: url('img/tile.jpg');
+            background-repeat: repeat-y;
+            background-position: top center;
+            background-color: #001425;
+            color: white;
+         }
+
+
+         .bodyDiv {
+            z-index: 1;
+            width: 100%;
+            height: 909px;
+            margin: 0px;
+            padding: 0px;
+            top: 0px;
+            left: 0px;
+            position: absolute;
+            background-image: url('img/bground.png');
+            background-repeat: no-repeat;
+            background-position: top center;
+            background-color: #001425;
+         }
+
+         .bodyDiv2 {
+            z-index: 2;
+            padding: 150px;
+         }
+
+         a:link {
+            color: rgb(70, 183, 215);
+            background-color: transparent;
+            text-decoration: none;
+         }
+
+         a:visited {
+            color: rgb(70, 183, 215);
+            background-color: transparent;
+            text-decoration: none;
+         }
+
+         a:hover {
+            color: red;
+            background-color: transparent;
+            text-decoration: underline;
+         }
+
+         a:active {
+            color: yellow;
+            background-color: transparent;
+            text-decoration: underline;
          }
       </style>
 
@@ -100,61 +155,61 @@
          //let lblTotalGames = document.getElementById("lblTotalGames");
          //lblTotalGames.innerText = "Total Games Recorded : " + data.updateCount;
 
-         if(sortType == "total_points") {
+         if (sortType == "total_points") {
             data.playerList = data.playerList.sort((a, b) => {
-            if (a.total_points > b.total_points) {
-               return -1;
-            }
-         });
+               if (a.total_points > b.total_points) {
+                  return -1;
+               }
+            });
          }
-         if(sortType == "name") {
+         if (sortType == "name") {
             data.playerList = data.playerList.sort((a, b) => {
-            if (a.name.toLowerCase() < b.name.toLowerCase()) {
-               return -1;
-            }
-         });
+               if (a.name.toLowerCase() < b.name.toLowerCase()) {
+                  return -1;
+               }
+            });
          }
-         if(sortType == "rank") {
+         if (sortType == "rank") {
             data.playerList = data.playerList.sort((a, b) => {
-            if (a.rank > b.rank) {
-               return -1;
-            }
-         });
+               if (a.rank > b.rank) {
+                  return -1;
+               }
+            });
          }
-         if(sortType == "games_played") {
+         if (sortType == "games_played") {
             data.playerList = data.playerList.sort((a, b) => {
-            if (a.games_played > b.games_played) {
-               return -1;
-            }
-         });
+               if (a.games_played > b.games_played) {
+                  return -1;
+               }
+            });
          }
-         if(sortType == "time_played") {
+         if (sortType == "time_played") {
             data.playerList = data.playerList.sort((a, b) => {
-            if (a.time_played > b.time_played) {
-               return -1;
-            }
-         });
+               if (a.time_played > b.time_played) {
+                  return -1;
+               }
+            });
          }
-         if(sortType == "kills") {
+         if (sortType == "kills") {
             data.playerList = data.playerList.sort((a, b) => {
-            if (a.kills > b.kills) {
-               return -1;
-            }
-         });
+               if (a.kills > b.kills) {
+                  return -1;
+               }
+            });
          }
-         if(sortType == "deaths") {
+         if (sortType == "deaths") {
             data.playerList = data.playerList.sort((a, b) => {
-            if (a.deaths > b.deaths) {
-               return -1;
-            }
-         });
+               if (a.deaths > b.deaths) {
+                  return -1;
+               }
+            });
          }
-         if(sortType == "kdr") {
+         if (sortType == "kdr") {
             data.playerList = data.playerList.sort((a, b) => {
-            if (a.kdr > b.kdr) {
-               return -1;
-            }
-         });
+               if (a.kdr > b.kdr) {
+                  return -1;
+               }
+            });
          }
          /*if(sortType == "player_killed") {
             data.playerList = data.playerList.sort((a, b) => {
