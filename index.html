@@ -14,12 +14,11 @@
    <div id="div2" class="bodyDiv"></div>
    <div id="div1" class="bodyDiv2">
 
-      <h1>PSONE Current Warhawk Stats <br>RESET from January 1st, 2024</h1>
-      <h1>Updated February 28th, 2024 (58 days worth of data)</h1>
-      <a href="original.html">Link to see ALL Warhawk data from January 1st, 2024</a>
-      <p>I am only showing the data from active accounts here.<br>Any account that has played in ranked games on PSONE's
-         server will show here.
-         <br>This table only shows the points earned SINCE January 1st, 2024
+      <h1>PSONE Current Warhawk Stats</h1>
+      <h1>Updated July 16th, 2024</h1>
+      <p>Unfortunately, PSONE Warhawk stats have had many problems.
+         <br/>Most of the data is not accurate by any means.
+         <br/>But here it is, a current snapshot of everyone's stats.
       </p>
       <p>It can take a while for the data to load. -GreenTie</p>
 
@@ -138,7 +137,7 @@
       //fetch function
       let randomNum = Math.floor(Math.random() * 1000);
 
-      fetch('./newdata.json?' + randomNum.toString()).then(function (u) { return u.json(); }).then(
+      fetch('./playerstats.json?' + randomNum.toString()).then(function (u) { return u.json(); }).then(
          function (json) {
             data_function(json, "total_points"); //calling and passing json to another function data_function
          }
@@ -259,9 +258,10 @@
             //text += cars[i] + "<br>";
             //alert(data.players[i].username);
 
-            if(data.playerList[i].total_points > 100000 || data.playerList[i].kills > 90900 || data.playerList[i].time_played > 10000 || data.playerList[i].deaths > 100000 || data.playerList[i].kdr > 1000) {
-               continue;
-            }
+            //filters
+            //if(data.playerList[i].total_points > 100000 || data.playerList[i].kills > 90900 || data.playerList[i].time_played > 10000 || data.playerList[i].deaths > 100000 || data.playerList[i].kdr > 1000) {
+            //   continue;
+           // }
 
 
 
@@ -301,11 +301,31 @@
             c1.innerText = data.playerList[i].name
             c2.innerText = data.playerList[i].rank
             c3.innerText = data.playerList[i].total_points
+            if(data.playerList[i].total_points>830000)
+            {
+               c3.innerText = "Invalid"
+            }
             c4.innerText = data.playerList[i].games_played
             c5.innerText = data.playerList[i].time_played
-            c6.innerText = data.playerList[i].kills
-            c7.innerText = data.playerList[i].deaths
+            c6.innerText = data.playerList[i].kills    //267809
+            if(data.playerList[i].kills>300809)
+            {
+               c6.innerText = "Invalid"
+            }
+            if(data.playerList[i].kills/(data.playerList[i].deaths+1) > 100)
+            {
+               c6.innerText = "Invalid"
+            }
+            c7.innerText = data.playerList[i].deaths//5001951
+            if(data.playerList[i].deaths>5000000)
+            {
+               c7.innerText = "Invalid"
+            }
             c8.innerText = data.playerList[i].kdr
+            if(data.playerList[i].kdr>100)
+            {
+               c8.innerText = "-"
+            }
             //c9.innerText = data.playerList[i].player_killed
             //c10.innerText = data.playerList[i].killed_times
             //c11.innerText = data.playerList[i].player_killed_by
